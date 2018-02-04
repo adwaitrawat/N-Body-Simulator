@@ -11,10 +11,11 @@
 #include <algorithm>
 #include <iostream>
 
-Celestial::Octree::Octree():root(Vector3d(0,0,0),0,0) {}
+Celestial::Octree::Octree():root(nullptr,Vector3d(0,0,0),0,0) {}
 
 #ifdef PARALLEL
 
+//
 // Find maximum between the two points
 double maxim(int initial, int final, const vector<Celestial::Body> bodies){
     double sqrmax = 0;
@@ -89,7 +90,7 @@ double Celestial::Octree::Build(const vector<Body>& bodies, double span){
     else
         size = 2*span;
 #endif
-    root = Node(Eigen::Vector3d(0,0,0),size,0);
+    root = Node(nullptr,Eigen::Vector3d(0,0,0),size,0);
     for(auto it = bodies.begin(); it != bodies.end(); ++it){
         root.Add(*it);
         // <<<<<<<< DEBUG ONLY >>>>>>>> //
